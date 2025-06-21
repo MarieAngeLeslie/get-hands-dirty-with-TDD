@@ -21,13 +21,14 @@ export class Game {
     private readonly tries: number = 10
   ) {}
 
-  async guess() {
+  async start() {
     const numberToGuess = this.generator.generate();
+    console.log(numberToGuess);
 
     for (let i = 0; i < this.tries; i++) {
       const guess = await this.inputNumber.read();
 
-      if (guess === undefined) {
+      if (!guess) {
         this.display.youLose();
         return;
       }

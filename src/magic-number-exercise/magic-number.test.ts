@@ -56,7 +56,7 @@ test("when right number is guessed", async () => {
     new MultipleValueInput([50]),
     display
   );
-  await game.guess();
+  await game.start();
 
   expect(display.messages[0]).toEqual("CORRECT");
 });
@@ -68,7 +68,7 @@ test("test when number is bellow right number", async () => {
     new MultipleValueInput([40]),
     display
   );
-  await game.guess();
+  await game.start();
 
   expect(display.messages[0]).toEqual("TOO LOW");
 });
@@ -80,7 +80,7 @@ test("test when number is above right number", async () => {
     new MultipleValueInput([51]),
     display
   );
-  await game.guess();
+  await game.start();
 
   expect(display.messages[0]).toEqual("TOO HIGH");
 });
@@ -92,7 +92,7 @@ test("losing when no more values", async () => {
     new MultipleValueInput([]),
     display
   );
-  await game.guess();
+  await game.start();
 
   expect(display.messages).toEqual(["YOU LOSE"]);
 });
@@ -104,7 +104,7 @@ test("find if the guessing number is bellow or is the right number ", async () =
     new MultipleValueInput([49, 50]),
     display
   );
-  await game.guess();
+  await game.start();
 
   expect(display.messages).toEqual(["TOO LOW", "CORRECT"]);
 });
@@ -117,12 +117,7 @@ test("exceeding the number of tries", async () => {
     display,
     3
   );
-  await game.guess();
+  await game.start();
 
-  expect(display.messages).toEqual([
-    "TOO LOW",
-    "TOO HIGH",
-    "TOO HIGH",
-    "YOU LOSE",
-  ]);
+  expect(display.messages).toEqual(["TOO LOW", "TOO HIGH", "TOO HIGH", "YOU LOSE"]);
 });
